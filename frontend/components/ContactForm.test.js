@@ -132,4 +132,31 @@ test('renders all fields text when all fields are submitted.', async () => {
     // Arrange
     render(<ContactForm />);
 
+    // Act
+    const firstNameInput = screen.getByLabelText(/first name/i);
+    userEvent.type(firstNameInput, "Raylen");
+
+    const lastNameInput = screen.getByLabelText(/last name/i);
+    userEvent.type(lastNameInput, "Burke");
+    
+    const emailInput = screen.getByLabelText(/email/i);
+    userEvent.type(emailInput, "raylen@gmail.com");
+
+    const messageInput = screen.getByLabelText(/message/i);
+    userEvent.type(messageInput, "This Is My Info");
+
+    const submitButton = screen.getByRole("button");
+    userEvent.click(submitButton);
+
+    const firstnameDisplay = screen.queryByTestId(/firstnameDisplay/i);
+    const lastNameDisplay = screen.queryByTestId(/lastnamedisplay/i);
+    const emailDisplay = screen.queryByTestId(/emaildisplay/i);
+    const messageDisplay = screen.queryByTestId(/messagedisplay/i);
+
+    // Assert
+    expect(firstnameDisplay).toBeInTheDocument();
+    expect(lastNameDisplay).toBeInTheDocument();
+    expect(emailDisplay).toBeInTheDocument();
+    expect(messageDisplay).toBeInTheDocument();
+
 });
