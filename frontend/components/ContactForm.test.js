@@ -38,17 +38,8 @@ test('renders THREE error messages if user enters no values into any fields.', a
     render(<ContactForm />);
 
     // Act
-    const firstNameInput = screen.getByLabelText(/first name/i);
-    userEvent.type(firstNameInput, "foo");
-    userEvent.clear(firstNameInput);
-    
-    const lastNameInput = screen.getByLabelText(/last name/i);
-    userEvent.type(lastNameInput, "bar");
-    userEvent.clear(lastNameInput);
-
-    const emailInput = screen.getByLabelText(/email/i);
-    userEvent.type(emailInput, "too");
-    userEvent.clear(emailInput);
+    const submitButton = screen.queryByRole("button");
+    userEvent.click(submitButton);
     
     const errors = screen.getAllByText(/error:/i);
 
